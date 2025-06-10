@@ -14,8 +14,10 @@ function validateForm(e) {
    const searchTerm = document.querySelector('#termino').value
    if(searchTerm === ''){
         showAlert('Add a search term')
-        
+        return;
    }
+
+   searchImages(searchTerm);
 }
 
 function showAlert(messsage) {
@@ -37,4 +39,19 @@ const alertExists = document.querySelector('.bg-red-100')
     }
 
     
+}
+
+function searchImages(term) {
+    const key = '19556592-05e4fd1ac1f8f526d81e394e2'
+    const url = `https://pixabay.com/api/?key=${key}&q=${term}`
+
+    fetch(url)
+        .then(response => response.json())
+        .then(result => {
+            showImages(result.hits);
+        })
+}
+
+function showImages(images){
+    console.log(images);
 }
