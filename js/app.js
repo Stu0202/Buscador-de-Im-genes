@@ -2,6 +2,7 @@ const result = document.querySelector('#resultado')
 const form = document.querySelector('#formulario')
 const recordsPerPage =40;
 let totalPages;
+let iterador
 
 window.onload = () => {
     form.addEventListener('submit',validateForm)
@@ -55,6 +56,15 @@ function searchImages(term) {
         })
 }
 
+//Generador que va a registrar la cantidad de elementos de acuerdo al numero de paginas
+
+function *createPager(total){
+    for (let i = 1; i <=total ; i++){
+        yield i
+       
+    }
+}
+
 function calculatePage(total) {
     return parseInt(Math.ceil(total/recordsPerPage))
 }
@@ -84,4 +94,11 @@ function showImages(images){
                 </div>
         `
     });
+
+    printPager();
+  
+}
+
+function printPager(){
+    iterador = createPager(totalPages)
 }
